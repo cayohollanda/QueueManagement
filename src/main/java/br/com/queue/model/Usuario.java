@@ -30,7 +30,6 @@ public class Usuario {
 	private String email;
 	
 	@Column
-	@NotBlank(message="A senha não pode ficar em branco.")
 	private String senha;
 
 	@ManyToMany

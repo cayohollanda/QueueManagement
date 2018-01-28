@@ -8,4 +8,6 @@ import br.com.queue.model.Ficha;
 @Repository
 public interface FichaRepository extends JpaRepository<Ficha, Long> {
 
+	Ficha findByEmpresaIs(Long id);
+
 }

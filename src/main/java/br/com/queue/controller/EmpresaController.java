@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.queue.model.Empresa;
 import br.com.queue.model.Ficha;
+import br.com.queue.model.Usuario;
 import br.com.queue.service.EmpresaService;
 import br.com.queue.service.FichaService;
 

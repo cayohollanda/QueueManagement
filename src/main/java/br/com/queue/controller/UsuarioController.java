@@ -38,7 +38,6 @@ public class UsuarioController {
 		mv.addObject("grupos", grupos);
 		mv.addObject("usuario", usuario);
 		
-		
 		return mv;
 	}
 	

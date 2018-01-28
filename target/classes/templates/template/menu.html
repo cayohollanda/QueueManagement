@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+
+	<div th:include="template/imports :: imports"></div>
+	
+	<div th:fragment="menu">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<!-- NAV HEADER -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="/" class="navbar-brand">Q-Manager</a>
+				</div>
+				<!-- NAV HEADER -->
+				
+				<div class="collapse navbar-collapse" id="toggle">
+					<ul class="nav navbar-nav">
+						<!-- LINK's -->
+						<li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-haspopup="true" aria-expanded="false">Usuários <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/cadastroUsuarios}">Cadastrar Usuário</a></li>
+								<li><a th:href="@{/listaUsuarios}">Lista de Usuários</a></li>
+							</ul>	
+						</li>
+						
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+								aria-haspopup="true" aria-expanded="false">Empresas <span class="caret"></span></a>
+							
+							<ul class="dropdown-menu">
+								<li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a th:href="@{/cadastroEmpresa}">Cadastrar Empresa</a></li>
+								<li><a th:href="@{/listaEmpresas}">Lista de Empresas</a></li>
+							</ul>
+						</li>
+						<li><a href="/login?logout">Sair</a></li>
+						<!-- LINK's -->
+						
+						<!-- FORMULÁRIO DE PESQUISA (DE EMPRESA) -->
+						<form class="navbar-form navbar-right" method="POST" th:action="@{/pesquisarEmpresa}">
+							<div class="input-group">
+								<input type="text" class="form-control" name="nome" placeholder="Pesquisar Empresa..." />
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+						<!-- FORMULÁRIO DE PESQUISA (DE EMPRESA) -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</html>

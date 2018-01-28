@@ -20,4 +20,8 @@ public class FichaService {
 	public void save(Ficha ficha) {
 		this.repository.save(ficha);
 	}
+	
+	public Ficha findByEmpresaIs(Long id) {
+		return this.repository.findByEmpresaIs(id);
+	}
 }
