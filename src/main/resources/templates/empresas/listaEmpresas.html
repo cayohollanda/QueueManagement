@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorator="template/principal">
+<head>
+<title>Lista de Empresas</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="panel panel-default" style="margin-top: 10px">
+				<h2 class="panel-heading" style="padding: 10px">Lista de Empresas</h2>
+				<div class="panel-body">
+					<table class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<td>ID</td>
+								<td>NOME</td>
+								<td>CNPJ</td>
+								<td>RUA</td>
+								<td>BAIRRO</td>
+								<td>N°</td>
+								<td>TELEFONE</td>
+								<td th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" colspan="3">AÇÕES</td>
+								<td th:if="!${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" colspan="1">AÇÕES</td>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<div th:each="empresa : ${empresas}">
+								<tr>
+									<td th:text="${empresa.id}"></td>
+									<td th:text="${empresa.nome}"></td>
+									<td th:text="${empresa.cnpj}"></td>
+									<td th:text="${empresa.rua}"></td>
+									<td th:text="${empresa.bairro}"></td>
+									<td th:text="${empresa.numero}"></td>
+									<td th:text="${empresa.telefone}"></td>
+									<td th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a th:href="@{/editarEmpresa/{id}(id=${empresa.id})}" class="btn btn-xs btn-success">Editar</a></td>
+									<td th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a th:href="@{/excluirEmpresa/{id}(id=${empresa.id})}" class="btn btn-xs btn-danger">Excluir</a></td>
+									<td><a th:href="@{/mostrarEmpresa/{id}(id=${empresa.id})}" class="btn btn-xs btn-primary">Visitar</a></td>
+								</tr>
+							</div>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

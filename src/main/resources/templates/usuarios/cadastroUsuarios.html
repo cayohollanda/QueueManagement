@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorator="template/principal">
+<head>
+<title>Cadastro de Usuários</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="panel panel-default" style="margin-top: 10px">
+				<h2 class="panel-heading">Cadastro de Usuários</h2>
+				
+				<div class="panel-body">
+					<form th:action="@{/salvaUsuario}" method="POST" th:object="${usuario}">
+						<div th:if="${#fields.hasErrors('nome')}">
+							<div class="alert alert-danger" th:errors="*{nome}">Nome</div>
+						</div>
+						<div th:if="${#fields.hasErrors('login')}">
+							<div class="alert alert-danger" th:errors="*{login}">Login</div>
+						</div>
+						<div th:if="${#fields.hasErrors('email')}">
+							<div class="alert alert-danger" th:errors="*{email}">E-mail</div>
+						</div>
+						<div th:if="${#fields.hasErrors('senha')}">
+							<div class="alert alert-danger" th:errors="*{senha}">Senha</div>
+						</div>
+						<div class="form-group">
+							<input type="hidden" th:field="*{id}" />
+							<div class="form-group row col-md-7">
+								Nome: <input class="form-control" name="nome" th:field="*{nome}" placeholder="Informe o nome" />
+							</div>
+							
+							<div class="form-group row col-md-5" style="margin-left: 10px">
+								Login: <input class="form-control" name="login" th:field="*{login}" placeholder="Informe o login" />
+							</div>
+							
+							<div class="form-group row col-md-7">
+								E-mail: <input type="text" class="form-control" name="email" th:field="*{email}" placeholder="Informe o e-mail" />
+							</div>
+							
+							<div class="form-group row col-md-5" style="margin-left: 10px">
+								Senha: <input type="password" class="form-control" name="senha" th:field="*{senha}" />
+							</div>
+							
+							<div class="form-group row">
+								<div class="col-md-12">
+									<h3 align="left">Grupos de Permissões</h3>
+									<div th:each="grupo : ${grupos}">
+										<input type="checkbox" th:field="*{grupos}" th:value="${grupo.id}" th:text="${grupo.descricao}" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group row" style="margin-left: 01px">
+								<input type="submit" class="btn btn-success" value="Gravar" />
+								<a th:href="@{/listaUsuarios}" class="btn btn-primary">Usuários</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

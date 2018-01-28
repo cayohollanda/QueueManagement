@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorator="template/principal">
+<head>
+<title>Cadastro de Empresa</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="panel panel-default" style="margin-top: 10px">
+				<h2 class="panel-heading" style="margin: 10px">Cadastro de Empresa</h2>
+				<div class="panel-body">
+					<form class="form-group" method="POST" th:action="@{/salvarEmpresa}" th:object="${empresa}">
+						<input type="hidden" name="id" th:field="*{id}" />
+						<div class="form-group row col-md-6">
+							Nome: <input class="form-control" type="text" name="nome" th:field="*{nome}" placeholder="Informe o nome da empresa" />
+						</div>
+						
+						<div class="form-group row col-md-6" style="margin-left: 10px">
+							CNPJ: <input class="form-control" type="text" name="cnpj" th:field="*{cnpj}" placeholder="Informe o CNPJ da empresa" />
+						</div>
+						
+						<div class="form-group row col-md-6">
+							Rua: <input class="form-control" type="text" name="rua" th:field="*{rua}" placeholder="Informe o rua da empresa" />
+						</div>
+						
+						<div class="form-group row col-md-6" style="margin-left: 10px">
+							Bairro: <input class="form-control" type="text" name="bairro" th:field="*{bairro}" placeholder="Informe o bairro da empresa" />
+						</div>
+						
+						<div class="form-group row col-md-6">
+							N°: <input class="form-control" type="number" name="numero" th:field="*{numero}" placeholder="Informe o N° da empresa" />
+						</div>
+						
+						<div class="form-group row col-md-6" style="margin-left: 10px">
+							Telefone: <input class="form-control" type="text" name="telefone" th:field="*{telefone}" placeholder="Informe o telefone da empresa" />
+						</div>
+						
+						<div class="form-group-row">
+							<a href="#" class="btn btn-primary" style="float: right">Empresas</a>
+							<input type="submit" class="btn btn-success" style="float: right" value="Gravar" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
