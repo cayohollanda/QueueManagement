@@ -3,6 +3,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf.extras.springsecurity4"
     layout:decorator="template/principal">
 <head>
 <title th:text="${empresa.nome}"></title>
@@ -15,14 +16,38 @@
 				
 				<div class="panel-body">
 					<h3>Informações</h3>
+					<div th:if="${param.new}">
+						<div class="alert alert-success">Ficha criada com sucesso! Verifique sua ficha na fila.</div>
+					</div>
+					
+					<div th:if="${param.zerado}">
+						<div class="alert alert-success">Fila zerada com sucesso!</div>
+					</div>
+					
+					<div th:if="${param.saiuFila}">
+						<div class="alert alert-success">Saiu da fila com sucesso!</div>
+					</div>
 					<ul class="list-group col-md-5">
 						<li class="list-group-item">Rua: <span th:text="${empresa.rua}"></span></li>
 						<li class="list-group-item">Bairro: <span th:text="${empresa.bairro}"></span></li>
 						<li class="list-group-item">N°: <span th:text="${empresa.numero}"></span></li>
 						<li class="list-group-item">Telefone: <span th:text="${empresa.telefone}"></span></li>
 					</ul>
-					<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalFila" style="margin-top: 90px">Ver fila</a>
-					<a th:href="@{/entrarFila(empresa=${empresa.id}, usuario=${usuario})}" class="btn btn-success" style="margin-top: 90px">Entrar na fila</a>
+					
+					<!-- panel panel-default col-md-6 -->
+					<div style="margin-left: 5px">
+						<form th:action="@{/sairFila}" method="POST" style="margin-top: 5px; padding: 5px">
+							<input type="hidden" th:value="${usuario}" name="username" />
+							<input type="hidden" th:value="${empresa.id}" name="idEmpresa" />
+						
+							<div class="btn-group-vertical">
+								<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalFila">Ver fila</a>
+								<a th:href="@{/entrarFila(empresa=${empresa.id}, usuario=${usuario})}" class="btn btn-success">Entrar na fila</a>
+								<a th:href="@{/zerarFila/{id}(id=${empresa.id})}" class="btn btn-success">Zerar Fila</a>
+								<input type="submit" class="btn btn-danger" value="Sair da fila" />
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -39,7 +64,8 @@
 						<ul class="list-group">
 							<div th:each="ficha : ${fichas}">
 								<div th:if="${ficha.empresa} == ${empresa.id}">
-									<li class="list-group-item">Ficha/Nome: <span th:text="${ficha.id}"></span>/<span th:text="${ficha.usuario}"></span></li>
+									<li class="list-group-item list-group-item-info">Ficha/Nome: <b><span th:text="${ficha.id}">
+										</span>/<span th:text="${ficha.usuario}"></span></b></li>
 								</div>
 							</div>
 						</ul>

@@ -49,6 +49,9 @@ public class EmpresaController {
 			return mv;
 		}
 		
+		empresa.setNome(empresa.getNome().toUpperCase());
+		empresa.setRua(empresa.getRua().toUpperCase());
+		empresa.setBairro(empresa.getBairro().toUpperCase());
 		empresaService.save(empresa);
 		
 		mv.setViewName(LISTA_EMPRESAS);
@@ -116,7 +119,7 @@ public class EmpresaController {
 		
 		String auth = SecurityContextHolder.getContext().getAuthentication().getName();
 		
-		List<Ficha> fichas = fichaService.list(); 
+		List<Ficha> fichas = fichaService.findAllByOrderByIdDesc();
 		
 		mv.addObject("fichas", fichas);
 		mv.addObject("ficha", ficha);

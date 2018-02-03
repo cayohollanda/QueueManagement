@@ -14,6 +14,15 @@
 				<h2 class="panel-heading" style="margin: 10px">Cadastro de Empresa</h2>
 				<div class="panel-body">
 					<form class="form-group" method="POST" th:action="@{/salvarEmpresa}" th:object="${empresa}">
+						<div th:if="${#fields.hasErrors('nome')}">
+							<div class="alert alert-danger" th:errors="*{nome}">Nome</div>
+						</div>
+						<div th:if="${#fields.hasErrors('cnpj')}">
+							<div class="alert alert-danger" th:errors="*{cnpj}">CNPJ</div>
+						</div>
+						<div th:if="${#fields.hasErrors('telefone')}">
+							<div class="alert alert-danger" th:errors="*{telefone}">telefone</div>
+						</div>
 						<input type="hidden" name="id" th:field="*{id}" />
 						<div class="form-group row col-md-6">
 							Nome: <input class="form-control" type="text" name="nome" th:field="*{nome}" placeholder="Informe o nome da empresa" />

@@ -9,10 +9,14 @@
 <body>
 	<div th:include="template/menu :: menu"></div>
 
-	<section layout:fragment="content">
+	<div class="container-fluid">
+		<div class="row">
+			<section layout:fragment="content">
 	
-	</section>
-
+			</section>
+		</div>
+	</div>
+	
 	<div th:include="template/js :: js"></div>
 </body>
 </html>

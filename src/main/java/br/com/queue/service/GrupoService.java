@@ -22,4 +22,8 @@ public class GrupoService {
 	public List<Grupo> list() {
 		return this.repository.findAll();
 	}
+
+	public List<Grupo> findAll() {
+		return this.repository.findAll();
+	}
 }

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     xmlns:th="http://www.thymeleaf.org">
 
 	<div th:include="template/imports :: imports"></div>
@@ -42,7 +41,16 @@
 								<li><a th:href="@{/listaEmpresas}">Lista de Empresas</a></li>
 							</ul>
 						</li>
-						<li><a href="/login?logout">Sair</a></li>
+						
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expandaded="false">Minha conta <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/alterarDados}">Alterar dados</a></li>
+								<li><a th:href="@{/alterarSenha}">Alterar senha</a></li>
+								<li><a th:href="@{/minhasEmpresas}">Minhas empresas</a></li>
+							</ul>
+						</li>
 						<!-- LINK's -->
 						
 						<!-- FORMULÁRIO DE PESQUISA (DE EMPRESA) -->
@@ -57,6 +65,13 @@
 							</div>
 						</form>
 						<!-- FORMULÁRIO DE PESQUISA (DE EMPRESA) -->
+						
+						<form action="/logout" method="POST" class="nav navbar navbar-right" style="margin-top: 12px; margin-left: 600px; position: absolute;">
+							<button type="submit" class="btn btn-xs btn-warning">
+								<span class="glyphicon glyphicon-log-out"> <b>Sair</b></span>
+							</button>
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+						</form>
 					</ul>
 				</div>
 			</div>

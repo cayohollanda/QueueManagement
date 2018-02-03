@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Alterar Senha</title>
+</head>
+<body>
+	<div th:include="template/imports"></div>
+	<div class="container">
+		<div class="row col-md-6">
+			<h2>Nova senha:</h2>
+			<form class="form-group" th:action="@{/salvaUsuario}" method="POST" th:object="${usuario}">
+				<input type="hidden" name="action" value="1" />
+				<input type="hidden" name="voltarDash" value="1" />
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{nome}" />
+				<input type="hidden" th:field="*{email}" />
+				<input type="hidden" th:field="*{login}" />
+				<input type="hidden" th:field="*{grupos}" />
+				<input type="password" class="form-control" th:field="*{senha}" />
+				<a th:href="@{/}" class="btn btn-danger" style="float: right; margin-top: 2px;">Voltar</a>
+				<input type="submit" class="btn btn-success" value="Alterar" style="float: right; margin-top: 2px;" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>
